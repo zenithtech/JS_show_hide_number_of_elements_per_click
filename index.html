@@ -7,11 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/css.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/js.js"></script>
+    <script type="text/javascript" src="js/showHideEl.js"></script>
 </head>
 
 <body>
-    <ul id="mylist">
+
+    <ul id="mylist_one">
+        <li class="title">
+            List one
+        </li>
         <li class="el">1</li>
         <li class="el">2</li>
         <li class="el">3</li>
@@ -27,27 +31,61 @@
             <div class="btn hide">Hide</div>
         </li>
     </ul>
+
+    <ul id="mylist_two">
+        <li class="title">
+            List two
+        </li>
+        <li class="el">1</li>
+        <li class="el">2</li>
+        <li class="el">3</li>
+        <li class="el">4</li>
+        <li class="el">5</li>
+        <li class="el">6</li>
+        <li class="el">7</li>
+        <li class="el">8</li>
+        <li class="el">9</li>
+        <li class="el">10</li>
+        <li class="buttons">
+            <div class="btn show">Show</div>
+            <div class="btn hide">Hide</div>
+        </li>
+    </ul>
+
 </body>
 <script type="text/javascript">
 /*global showhide*/
 jQuery(document).ready(function() {
 
     // Pass ID of parent element, class/tag of child elements, and initial number of visible elements
-    showhide.initEl("mylist", ".el", 0);
+    showhide.initEl("mylist_one", ".el", 0);
+    showhide.initEl("mylist_two", ".el", 1);
 
     // on click of the show button
-    jQuery("#mylist .show").on({
+    jQuery("#mylist_one .show").on({
         click: function() {
             // Pass ID of parent element, class/tag of child elements, and initial number of hidden elements to show per click.
-            showhide.showEl("mylist", ".el", 1);
+            showhide.showEl("mylist_one", ".el", 1);
+        }
+    });
+    jQuery("#mylist_two .show").on({
+        click: function() {
+            // Pass ID of parent element, class/tag of child elements, and initial number of hidden elements to show per click.
+            showhide.showEl("mylist_two", ".el", 1);
         }
     });
 
     // on click of the hide button
-    jQuery("#mylist .hide").on({
+    jQuery("#mylist_one .hide").on({
         click: function() {
             // Pass ID of parent element, class/tag of child elements, and initial number of visible elements to hide per click.
-            showhide.hideEl("mylist", ".el", 1);
+            showhide.hideEl("mylist_one", ".el", 1);
+        }
+    });
+    jQuery("#mylist_two .hide").on({
+        click: function() {
+            // Pass ID of parent element, class/tag of child elements, and initial number of visible elements to hide per click.
+            showhide.hideEl("mylist_two", ".el", 1);
         }
     });
 
