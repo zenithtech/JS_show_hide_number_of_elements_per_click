@@ -19,10 +19,6 @@ var showhide = Object.create({
         jQuery(el).find('a.show').css('display', 'none');
         jQuery(el).find('a.hide').css('display', 'none');
 
-        if (jQuery(hidden).length !== 0) {
-            jQuery(el).find('div.spinner').css('display', 'block');
-        }
-
         jQuery(jQuery(hidden).slice(0, roundup)).each(function() {
             jQuery(this).css('display', 'block');
             jQuery(this).addClass('visible');
