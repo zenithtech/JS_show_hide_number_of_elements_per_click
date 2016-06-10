@@ -11,8 +11,7 @@
 </head>
 
 <body>
-
-    <ul id="mylist_one">
+    <ul class="mylist">
         <li class="title">
             List one
         </li>
@@ -31,8 +30,7 @@
             <div class="btn hide">Hide</div>
         </li>
     </ul>
-
-    <ul id="mylist_two">
+    <ul class="mylist">
         <li class="title">
             List two
         </li>
@@ -51,44 +49,33 @@
             <div class="btn hide">Hide</div>
         </li>
     </ul>
-
 </body>
 <script type="text/javascript">
-/*global showhide*/
-jQuery(document).ready(function() {
+jQuery(document).on({
+    ready: function() {
 
-    // Pass ID of parent element, class/tag of child elements, and initial number of visible elements
-    showhide.initEl("mylist_one", ".el", 0);
-    showhide.initEl("mylist_two", ".el", 1);
+        jQuery(document.getElementsByClassName('mylist')).each(function() {
+            var mylist = this;
 
-    // on click of the show button
-    jQuery("#mylist_one .show").on({
-        click: function() {
-            // Pass ID of parent element, class/tag of child elements, and initial number of hidden elements to show per click.
-            showhide.showEl("mylist_one", ".el", 1);
-        }
-    });
-    jQuery("#mylist_two .show").on({
-        click: function() {
-            // Pass ID of parent element, class/tag of child elements, and initial number of hidden elements to show per click.
-            showhide.showEl("mylist_two", ".el", 1);
-        }
-    });
+            showhide.initEl(mylist, '.el', 1);
 
-    // on click of the hide button
-    jQuery("#mylist_one .hide").on({
-        click: function() {
-            // Pass ID of parent element, class/tag of child elements, and initial number of visible elements to hide per click.
-            showhide.hideEl("mylist_one", ".el", 1);
-        }
-    });
-    jQuery("#mylist_two .hide").on({
-        click: function() {
-            // Pass ID of parent element, class/tag of child elements, and initial number of visible elements to hide per click.
-            showhide.hideEl("mylist_two", ".el", 1);
-        }
-    });
+            jQuery(mylist).find('.show').on({
+                click: function(e) {
+                    e.preventDefault();
+                    showhide.showEl(mylist, '.el', 1);
+                }
+            });
 
+            jQuery(mylist).find('.hide').on({
+                click: function(e) {
+                    e.preventDefault();
+                    showhide.hideEl(mylist, '.el', 1);
+                }
+            });
+
+        });
+
+    }
 });
 </script>
 
