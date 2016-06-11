@@ -2,7 +2,7 @@ var showhide = Object.create({
 
     showEl: function(a, b, c) {
         /**
-         * Shows {c} elements at a time then run scrollto
+         * Shows {c} elements at a time then run scrolltobuttons
          * {a} {String} ID of parent HTML element
          * {b} {String} Class/Tag of child HTML elements
          * {c} {Number} How many hidden elements of {b} to show at a time.
@@ -14,7 +14,8 @@ var showhide = Object.create({
         var t = this,
             el = a,
             hidden = jQuery(el).find(b + ':hidden'),
-            roundup = c;
+            roundup = c,
+            thisEl = [];
 
         jQuery(el).find('a.show').css('display', 'none');
         jQuery(el).find('a.hide').css('display', 'none');
@@ -22,14 +23,16 @@ var showhide = Object.create({
         jQuery(jQuery(hidden).slice(0, roundup)).each(function() {
             jQuery(this).css('display', 'block');
             jQuery(this).addClass('visible');
+            thisEl.push(this);
         });
+
         t.checkEl(a, b);
-        t.scrollto(a);
+        t.scrollto(jQuery(thisEl[0]).offset().top);
     },
 
     hideEl: function(a, b, c) {
         /**
-         * Hides {c} elements at a time then run scrollto
+         * Hides {c} elements at a time then run scrolltobuttons
          * {a} {String} ID of parent HTML element
          * {b} {String} Class/Tag of child HTML elements
          * {c} {Number} How many visible elements of {b} to hide at a time.
@@ -50,8 +53,9 @@ var showhide = Object.create({
             jQuery(this).css('display', 'none');
             jQuery(this).removeClass('visible');
         });
+
         t.checkEl(a, b);
-        t.scrollto(a);
+        t.scrolltobuttons(a);
     },
 
     checkEl: function(a, b) {
@@ -99,20 +103,34 @@ var showhide = Object.create({
         this.checkEl(a, b);
     },
 
-    scrollto: function(a) {
+    scrolltobuttons: function(a) {
         /**
          * Scrolls window to position the show/hide buttons at the bottom of the window
          * {a} {String} ID of parent HTML element containing the show/hide buttons
          * 
          * @param  {String}
          * @return nothing
-         * @method scrollto
+         * @method scrolltobuttons
          */
         var e = jQuery(window).height(),
             w = jQuery(a).find('.buttons').height() + 20,
             f = jQuery(a).find('.buttons').offset().top;
         jQuery('html, body').animate({
             scrollTop: f - e + w
+        }, 200);
+    },
+
+    scrollto: function(a) {
+        /**
+         * Scrolls window to certain pixel
+         * {a} {Number} number of pixel to scroll to
+         * 
+         * @param  {Number}
+         * @return nothing
+         * @method scrollto
+         */
+        jQuery('html, body').animate({
+            scrollTop: a
         }, 200);
     }
 });
