@@ -95,11 +95,15 @@ var showhide = Object.create({
          * @return nothing
          * @method initEl
          */
-        jQuery(a).find(b).css('display', 'none');
-        jQuery(a).find(b + ':hidden').slice(0, c).each(function() {
-            jQuery(this).css('display', 'block');
-            jQuery(this).addClass('visible');
-        });
+        if(c == -1 || c === null || typeof c == 'undefined' ){
+            jQuery(a).find(b).css('display', 'block');
+        } else {
+            jQuery(a).find(b).css('display', 'none');
+            jQuery(a).find(b + ':hidden').slice(0, c).each(function() {
+                jQuery(this).css('display', 'block');
+                jQuery(this).addClass('visible');
+            });
+        }
         this.checkEl(a, b);
     },
 
